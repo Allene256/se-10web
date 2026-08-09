@@ -2,6 +2,18 @@ import * as React from "react"
 import { useSize } from "@/hooks/use-size"
 import { cn } from "@/lib/utils"
 
+/**
+ * @typedef {import("react").ImgHTMLAttributes<HTMLImageElement> & {
+ *   src: string;
+ *   fittingType?: "fill" | "fit";
+ *   originWidth?: number;
+ *   originHeight?: number;
+ *   focalPointX?: number;
+ *   focalPointY?: number;
+ *   quality?: number;
+ * }} ImageProps
+ */
+
 const FALLBACK_IMAGE_URL =
   "https://static.wixstatic.com/media/12d367_4f26ccd17f8f4e3a8958306ea08c2332~mv2.png"
 
@@ -171,6 +183,9 @@ ResponsiveImage.displayName = "ResponsiveImage"
  * device pixel ratio) and re-encoded to WebP; `fittingType="fill"` crops
  * server-side, optionally anchored at a focal point. Other URLs render as a
  * plain <img>. Failed loads swap to a fallback image.
+ */
+/**
+ * @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<ImageProps> & React.RefAttributes<HTMLImageElement>>}
  */
 const Image = React.forwardRef(
   (

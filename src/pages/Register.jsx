@@ -9,7 +9,7 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp
 import AuthLayout from "@/components/AuthLayout";
 import GoogleIcon from "@/components/GoogleIcon";
 import { toast } from "@/components/ui/use-toast";
-import { safeReturnTo } from "@/lib/authReturnTo";
+import { safeReturnTo } from "@/lib/autoReturnTo";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -20,7 +20,9 @@ export default function Register() {
   const [showOtp, setShowOtp] = useState(false);
   const [otpCode, setOtpCode] = useState("");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    /** @type {React.FormEvent<HTMLFormElement>} */ e
+  ) => {
     e.preventDefault();
     setError("");
     if (password !== confirmPassword) {
@@ -32,7 +34,11 @@ export default function Register() {
       await base44.auth.register({ email, password });
       setShowOtp(true);
     } catch (err) {
-      setError(err.message || "Registration failed");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Registration failed");
+      }
     } finally {
       setLoading(false);
     }
@@ -48,7 +54,11 @@ export default function Register() {
       }
       window.location.href = safeReturnTo();
     } catch (err) {
-      setError(err.message || "Invalid verification code");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Invalid verification code");
+      }
     } finally {
       setLoading(false);
     }
@@ -63,7 +73,11 @@ export default function Register() {
         description: "Check your email for the new code.",
       });
     } catch (err) {
-      setError(err.message || "Failed to resend code");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to resend code");
+      }
     }
   };
 

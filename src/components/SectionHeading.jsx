@@ -1,7 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-// Heading block with optical corner brackets + technical eyebrow label.
+/**
+ * @typedef {{
+ *   eyebrow?: string;
+ *   title: string;
+ *   subtitle?: string;
+ *   align?: "left" | "center";
+ * }} SectionHeadingProps
+ */
+
+/**
+ * @param {SectionHeadingProps} props
+ */
 export default function SectionHeading({ eyebrow, title, subtitle, align = "left" }) {
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left";
   return (

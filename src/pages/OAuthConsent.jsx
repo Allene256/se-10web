@@ -4,6 +4,22 @@ import { Button } from "@/components/ui/button";
 import { ShieldCheck, Loader2 } from "lucide-react";
 import AuthLayout from "@/components/AuthLayout";
 
+/**
+ * @typedef {{
+ *   name: string;
+ *   title?: string;
+ *   description?: string;
+ * }} OAuthConsentTool
+ *
+ * @typedef {{
+ *   authenticated: boolean;
+ *   client_name?: string;
+ *   app_name?: string;
+ *   login_path?: string;
+ *   tools?: OAuthConsentTool[];
+ * }} OAuthConsentInfo
+ */
+
 // App-side OAuth consent page for the app's MCP server. The platform redirects
 // AI clients here (see base44/mcp/config.json `consent_path`) with an opaque
 // `ctx` handle — the authorization request itself lives on the server. This page
@@ -13,7 +29,7 @@ import AuthLayout from "@/components/AuthLayout";
 // and copy are safe to edit.
 export default function OAuthConsent() {
   const ctx = new URLSearchParams(window.location.search).get("ctx");
-  const [info, setInfo] = useState(null);
+  const [info, setInfo] = useState(/** @type {OAuthConsentInfo | null} */ (null));
   const [checking, setChecking] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [decided, setDecided] = useState("");
@@ -34,7 +50,7 @@ export default function OAuthConsent() {
         // bearer token) so the server can list the granted tools for a
         // signed-in user — the same auth the approve/deny call sends; without
         // it the display request is anonymous and shows no tools.
-        const infoHeaders = {};
+        const infoHeaders = /** @type {Record<string, string>} */ ({ });
         if (appParams.token) infoHeaders.Authorization = "Bearer " + appParams.token;
         const res = await fetch(
           `/api/apps/${appParams.appId}/mcp/consent-info?handle=${encodeURIComponent(ctx)}`,
@@ -63,7 +79,7 @@ export default function OAuthConsent() {
           // round-trip and app-params.js would persist them into the freshly
           // authenticated session.
           const returnTo =
-            window.location.pathname + "?ctx=" + encodeURIComponent(ctx);
+            window.location.pathname + "?ctx=" + encodeURIComponent(ctx ?? "");
           const encoded = encodeURIComponent(returnTo);
           redirecting = true; // keep the spinner while the browser navigates
           window.location.href =
@@ -72,18 +88,24 @@ export default function OAuthConsent() {
         }
         setInfo(data);
       } catch (e) {
-        setError("Could not load this authorization request. Please try again.");
+        if (e instanceof Error) {
+          setError("Could not load this authorization request. Please try again.");
+        } else {
+          setError("Could not load this authorization request. Please try again.");
+        }
       } finally {
         if (!redirecting) setChecking(false);
       }
     })();
   }, [ctx]);
 
-  const respond = async (action) => {
+  const respond = async (
+    /** @type {"approve" | "deny"} */ action
+  ) => {
     setSubmitting(true);
     setError("");
     try {
-      const headers = { "Content-Type": "application/json" };
+      const headers = /** @type {Record<string, string>} */ ({ "Content-Type": "application/json" });
       // Cookie-backed sessions carry no token; sending "Bearer null" would
       // shadow the valid cookie, so add the header only when a token exists.
       if (appParams.token) headers.Authorization = "Bearer " + appParams.token;
@@ -100,10 +122,11 @@ export default function OAuthConsent() {
         // redirect the initial signed-out path uses — so they can return and
         // approve the still-valid handle.
         if (res.status === 401) {
-          const returnTo = window.location.pathname + "?ctx=" + encodeURIComponent(ctx);
+          const returnTo = window.location.pathname + "?ctx=" + encodeURIComponent(ctx ?? "");
           const encoded = encodeURIComponent(returnTo);
+          const loginPath = info?.login_path || "/login";
           window.location.href =
-            ((info && info.login_path) || "/login") + "?returnTo=" + encoded + "&from_url=" + encoded;
+            loginPath + "?returnTo=" + encoded + "&from_url=" + encoded;
           return;
         }
         // These all come AFTER the single-use handle is atomically consumed
@@ -129,7 +152,11 @@ export default function OAuthConsent() {
         setSubmitting(false);
       }
     } catch (e) {
-      setError(e.message);
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError("Could not complete authorization. Please try again.");
+      }
       setSubmitting(false);
     }
   };
@@ -145,8 +172,8 @@ export default function OAuthConsent() {
     );
   }
 
-  const client = (info && info.client_name) || "An AI client";
-  const appName = (info && info.app_name) || "this app";
+  const client = info?.client_name || "An AI client";
+  const appName = info?.app_name || "this app";
 
   if (decided) {
     return (
@@ -184,7 +211,7 @@ export default function OAuthConsent() {
     );
   }
 
-  const tools = Array.isArray(info.tools) ? info.tools : [];
+  const tools = Array.isArray(info?.tools) ? info.tools : [];
 
   return (
     <AuthLayout

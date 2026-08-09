@@ -9,14 +9,16 @@ import AuthLayout from "@/components/AuthLayout";
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
-  const resetToken = searchParams.get("token");
+  const resetToken = searchParams.get("token") ?? "";
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (
+    /** @type {React.FormEvent<HTMLFormElement>} */ e
+  ) => {
     e.preventDefault();
     setError("");
     if (newPassword !== confirmPassword) {
@@ -28,7 +30,11 @@ export default function ResetPassword() {
       await base44.auth.resetPassword({ resetToken, newPassword });
       window.location.href = "/login";
     } catch (err) {
-      setError(err.message || "Failed to reset password");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to reset password");
+      }
     } finally {
       setLoading(false);
     }
@@ -76,7 +82,10 @@ export default function ResetPassword() {
               autoFocus
               placeholder="••••••••"
               value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              onChange={
+                /** @param {React.ChangeEvent<HTMLInputElement>} e */
+                (e) => setNewPassword(e.target.value)
+              }
               className="pl-10 h-12"
               required
             />
@@ -92,7 +101,10 @@ export default function ResetPassword() {
               autoComplete="new-password"
               placeholder="••••••••"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={
+                /** @param {React.ChangeEvent<HTMLInputElement>} e */
+                (e) => setConfirmPassword(e.target.value)
+              }
               className="pl-10 h-12"
               required
             />

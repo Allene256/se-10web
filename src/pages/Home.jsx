@@ -13,10 +13,12 @@ import { Image } from "@/components/ui/image";
 const HERO_IMG = "https://media.base44.com/images/public/6a6d6283d21d0a7faa38be17/515c72c2c_generated_image.png";
 
 export default function Home() {
-  const logoRef = useRef(null);
+  const logoRef = useRef(/** @type {HTMLDivElement | null} */ (null));
 
   // mouse-move parallax on the SE-10 logo
-  const handleMove = (e) => {
+  const handleMove = (
+    /** @type {React.MouseEvent<HTMLElement>} */ e
+  ) => {
     const el = logoRef.current;
     if (!el) return;
     const x = (e.clientX / window.innerWidth - 0.5) * 18;

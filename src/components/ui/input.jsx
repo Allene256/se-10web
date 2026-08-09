@@ -2,6 +2,14 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * @typedef {import("react").InputHTMLAttributes<HTMLInputElement> & {
+ *   className?: string;
+ *   type?: string;
+ * }} InputProps
+ */
+
+/** @type {React.ForwardRefExoticComponent<React.PropsWithoutRef<InputProps> & React.RefAttributes<HTMLInputElement>>} */
 const Input = React.forwardRef(({ className, type, ...props }, ref) => {
   return (
     (<input

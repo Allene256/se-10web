@@ -2,8 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import SectionHeading from "@/components/SectionHeading";
 import OfficerCard from "@/components/OfficerCard";
+import AdviserCard from "@/components/AdviserCard";
 import CircuitGrid from "@/components/CircuitGrid";
 import { OFFICERS } from "@/data/officers";
+import { ADVISER } from "@/data/adviser";
 
 export default function Officers() {
   return (
@@ -31,8 +33,22 @@ export default function Officers() {
         </div>
       </section>
 
+      {/* adviser */}
+      <section className="relative py-16 md:py-24 border-t border-foreground/10">
+        <div className="mx-auto max-w-7xl px-5 md:px-8">
+          <SectionHeading
+            eyebrow="// The Faculty"
+            title="Meet the Adviser"
+            subtitle="The mentor who keeps the Neural Grid 10 aligned in and out of the classroom."
+          />
+          <div className="mt-10">
+            <AdviserCard adviser={ADVISER} />
+          </div>
+        </div>
+      </section>
+
       {/* grid */}
-      <section className="relative py-16 md:py-24">
+      <section className="relative py-16 md:py-24 border-t border-foreground/10">
         <div className="mx-auto max-w-7xl px-5 md:px-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
             {OFFICERS.map((o, i) => (
@@ -48,6 +64,9 @@ export default function Officers() {
   );
 }
 
+/**
+ * @param {{ label: string; value: string | number }} props
+ */
 function Stat({ label, value }) {
   return (
     <div className="border border-foreground/10 p-4 bg-card/50">
