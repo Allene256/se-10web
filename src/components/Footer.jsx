@@ -88,7 +88,7 @@ export default function Footer() {
               Intel
             </Link>
             <Link to="/references" className="font-mono-tech text-[10px] tracking-[0.3em] uppercase text-muted-foreground hover:text-stark transition-colors">
-              References
+              REFERENCES
             </Link>
           </div>
         </div>
