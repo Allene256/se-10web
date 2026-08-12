@@ -26,7 +26,7 @@ export const OFFICERS = [
     lastName: "DELFINADO",
     quote: "May exam?",
     color: "#00F2FF",
-    photo: "https://base44.app/api/apps/6a6d6283d21d0a7faa38be17/files/mp/public/6a6d6283d21d0a7faa38be17/9d0448ad9_MeettheOfficers4.png",
+    photo: "Kobie.png",
   },
   {
     id: 4,
@@ -62,7 +62,7 @@ export const OFFICERS = [
     lastName: "DALISAY",
     quote: "Where ever life plants you, bloom with grace.",
     color: "#00F2FF",
-    photo: "https://base44.app/api/apps/6a6d6283d21d0a7faa38be17/files/mp/public/6a6d6283d21d0a7faa38be17/d14830bde_MeettheOfficers9.png",
+    photo: "Josh.png",
   },
   {
     id: 8,
@@ -107,7 +107,7 @@ export const OFFICERS = [
     lastName: "PUEYO",
     quote: "123, kanya kanya na!.",
     color: "#00F2FF",
-    photo: "https://base44.app/api/apps/6a6d6283d21d0a7faa38be17/files/mp/public/6a6d6283d21d0a7faa38be17/a95b06444_MeettheOfficers12.png",
+    photo: "Daph.png",
   },
 ];
 
