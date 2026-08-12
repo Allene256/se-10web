@@ -17,7 +17,7 @@ export default function Officers() {
           <SectionHeading
             eyebrow="// The Roster"
             title="Meet the Officers"
-            subtitle="The twelve nodes that keep the Neural Grid 10 operational. Each role is a circuit; together they form the class command structure."
+            subtitle="Working in sync, this team's powered on and ready to launch!"
           />
           <motion.div
             initial={{ opacity: 0 }}
@@ -39,7 +39,7 @@ export default function Officers() {
           <SectionHeading
             eyebrow="// The Faculty"
             title="Meet the Adviser"
-            subtitle="The mentor who keeps the Neural Grid 10 aligned in and out of the classroom."
+            subtitle="The mentor who keeps the section aligned in and out of the classroom."
           />
           <div className="mt-10">
             <AdviserCard adviser={ADVISER} />
