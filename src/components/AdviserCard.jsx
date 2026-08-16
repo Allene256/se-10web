@@ -7,9 +7,7 @@ import { useNavigate } from "react-router-dom";
 // "Mentor Pod" — a wide, featured card for the class adviser, styled to match
 // the Stasis Pod officer aesthetic with neon halo, circuit frame, and scanlines.
 /**
- * @param {Object} props
- * @param {any} props.adviser
- * @param {number} [props.index=0]
+ * @param {{adviser: any, index: number}} props
  */
 export default function AdviserCard({ adviser, index = 0 }) {
   const initials =
@@ -59,7 +57,7 @@ export default function AdviserCard({ adviser, index = 0 }) {
                 <Image
                   src={adviser.photo}
                   alt={`${adviser.nickname} ${adviser.lastName}`}
-                  fittingType="fill"
+                  fittingType="fit"
                   className="h-full w-full"
                 />
               </div>

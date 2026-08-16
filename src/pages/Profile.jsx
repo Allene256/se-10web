@@ -59,7 +59,7 @@ export default function Profile() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, stiffness: 100, damping: 20 }}
-            className="relative aspect-[3/4] w-full overflow-hidden bg-card clip-corner"
+            className="relative aspect-square w-full overflow-hidden bg-card clip-corner"
           >
             <div className="pointer-events-none absolute inset-0 z-20">
               <span className="absolute left-2 top-2 h-6 w-6 border-l-2 border-t-2 border-primary/60" />
@@ -76,7 +76,7 @@ export default function Profile() {
                 <Image
                   src={person.photo}
                   alt={`${person.firstName} ${person.lastName}`}
-                  fittingType="fill"
+                  fittingType="fit"
                   className="h-full w-full"
                 />
               </div>

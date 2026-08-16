@@ -6,9 +6,7 @@ import { Image } from "@/components/ui/image";
 // "Stasis Pod" officer card — vertical, monochrome placeholder portrait with neon halo,
 // massive ghosted last name behind, role in cyan mono tag.
 /**
- * @param {Object} props
- * @param {any} props.officer
- * @param {number} [props.index=0]
+ * @param {{officer: any, index: number}} props
  */
 export default function OfficerCard({ officer, index = 0 }) {
   const initials = (officer.firstName?.[0] ?? "") + (officer.lastName?.[0] ?? "");
@@ -23,7 +21,7 @@ export default function OfficerCard({ officer, index = 0 }) {
       onClick={() => navigate(`/profile/${officer.id}`)}
       role="button"
       tabIndex={0}
-      className="group relative aspect-[3/4] w-full overflow-hidden bg-card clip-corner cursor-pointer"
+      className="group relative aspect-square w-full overflow-hidden bg-card clip-corner cursor-pointer"
     >
       {/* circuit frame */}
       <div className="pointer-events-none absolute inset-0 z-20">
@@ -57,7 +55,7 @@ export default function OfficerCard({ officer, index = 0 }) {
                 <Image
                   src={officer.photo}
                   alt={`${officer.firstName} ${officer.lastName}`}
-                  fittingType="fill"
+                  fittingType="fit"
                   className="h-full w-full"
                 />
               </div>

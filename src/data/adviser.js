@@ -7,5 +7,5 @@ export const ADVISER = {
   role: "CLASS ADVISER // CLCE SUBJECT TEACHER",
   quote: "One lesson at a time.",
   color: "#2E5BFF",
-  photo: "Ms. Olive Photo.jpeg", // to be added when an official portrait is provided
+  photo: "/Ms. Olive Photo.jpeg",
 };
