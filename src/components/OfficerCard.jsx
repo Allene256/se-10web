@@ -1,11 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { Image } from "@/components/ui/image";
 
 // "Stasis Pod" officer card — vertical, monochrome placeholder portrait with neon halo,
 // massive ghosted last name behind, role in cyan mono tag.
+/**
+ * @param {Object} props
+ * @param {any} props.officer
+ * @param {number} [props.index=0]
+ */
 export default function OfficerCard({ officer, index = 0 }) {
   const initials = (officer.firstName?.[0] ?? "") + (officer.lastName?.[0] ?? "");
+  const navigate = useNavigate();
 
   return (
     <motion.article
@@ -13,7 +20,10 @@ export default function OfficerCard({ officer, index = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay: (index % 3) * 0.08, stiffness: 100, damping: 20 }}
-      className="group relative aspect-[3/4] w-full overflow-hidden bg-card clip-corner"
+      onClick={() => navigate(`/profile/${officer.id}`)}
+      role="button"
+      tabIndex={0}
+      className="group relative aspect-[3/4] w-full overflow-hidden bg-card clip-corner cursor-pointer"
     >
       {/* circuit frame */}
       <div className="pointer-events-none absolute inset-0 z-20">

@@ -2,24 +2,19 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Image } from "@/components/ui/image";
 import { GraduationCap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
+// "Mentor Pod" — a wide, featured card for the class adviser, styled to match
+// the Stasis Pod officer aesthetic with neon halo, circuit frame, and scanlines.
 /**
- * @typedef {Object} AdviserCardAdviser
- * @property {string} [firstName]
- * @property {string} [lastName]
- * @property {string} [nickname]
- * @property {string | null} [photo]
- * @property {string} [role]
- * @property {string} [quote]
- * @property {string} [color]
- */
-
-/**
- * @param {{ adviser: AdviserCardAdviser, index?: number }} props
+ * @param {Object} props
+ * @param {any} props.adviser
+ * @param {number} [props.index=0]
  */
 export default function AdviserCard({ adviser, index = 0 }) {
   const initials =
     (adviser.nickname?.[0] ?? "") + (adviser.lastName?.[0] ?? "");
+  const navigate = useNavigate();
 
   return (
     <motion.article
@@ -27,7 +22,10 @@ export default function AdviserCard({ adviser, index = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.5, delay: index * 0.08, stiffness: 100, damping: 20 }}
-      className="group relative w-full overflow-hidden bg-card border border-primary/30 clip-corner grid md:grid-cols-[280px_1fr] min-h-[360px]"
+      onClick={() => navigate(`/profile/${adviser.id}`)}
+      role="button"
+      tabIndex={0}
+      className="group relative w-full overflow-hidden bg-card border border-primary/30 clip-corner grid md:grid-cols-[280px_1fr] min-h-[360px] cursor-pointer"
     >
       {/* circuit frame */}
       <div className="pointer-events-none absolute inset-0 z-20">
@@ -57,7 +55,7 @@ export default function AdviserCard({ adviser, index = 0 }) {
           />
           <div className="relative h-40 w-40 md:h-48 md:w-48 rounded-full overflow-hidden border border-primary/40 transition-all duration-500 group-hover:border-accent group-hover:shadow-[0_0_40px_rgba(46,91,255,0.6)]">
             {adviser.photo ? (
-              <div className="absolute inset-0 grayscale transition-all duration-500 group-hover:grayscale-0">
+              <div className="absolute inset-0 transition-all duration-500">
                 <Image
                   src={adviser.photo}
                   alt={`${adviser.nickname} ${adviser.lastName}`}
