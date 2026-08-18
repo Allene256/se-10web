@@ -16,16 +16,16 @@ export const EVENTS = [
   },
   {
     id: "evt-3",
-    date: "Paano, kapag may iba siya?",
-    title: "Mahirap",
-    description: "Masakit.",
-    tag: "SPORTS",
+    date: "July 16, 2026",
+    title: "Class Election",
+    description: "The election of the class' officers begins.",
+    tag: "ELECTION",
   },
   {
     id: "evt-4",
-    date: "October 10, 2026",
-    title: "Earth Marshals Cleanup Drive",
-    description: "The marshals lead a sustainability operation across campus grounds — the grid stays green.",
+    date: "HI JOSH!",
+    title: "Undecided pa pu!",
+    description: "Kaya mo naman pala eh, pero 'bat pagdating sakin hirap na hirap ka?",
     tag: "SERVICE",
   },
 ];
