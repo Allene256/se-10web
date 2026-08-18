@@ -2,23 +2,23 @@
 export const EVENTS = [
   {
     id: "evt-1",
-    date: "August 8, 2026",
-    title: "Class Orientation: Neural Grid Online",
-    description: "SE-10 officially boots up. The class meets its officers, locks in protocols, and sets the frequency for the year.",
+    date: "June 29, 2026",
+    title: "SHS Orientation",
+    description: "The opening introduction of the school year! All Senior Highschool students gather in the Sentrum, starting of the S.Y.!",
     tag: "LAUNCH",
   },
   {
     id: "evt-2",
-    date: "August 29, 2026",
-    title: "Team Building: Circuit Sync",
-    description: "A full-day sync to align the grid — games, challenges, and the formation of the SE-10 collective.",
+    date: "June 29, 2026 - July 2, 2026",
+    title: "Classroom Orientation!",
+    description: "A full-day session to familiarize students with their new learning environment.",
     tag: "BONDING",
   },
   {
     id: "evt-3",
-    date: "September 19, 2026",
-    title: "Intramurals Qualifiers",
-    description: "Sports Reps rally the grid into the arena. Cyan and blue take the court.",
+    date: "Paano, kapag may iba siya?",
+    title: "Mahirap",
+    description: "Masakit.",
     tag: "SPORTS",
   },
   {
