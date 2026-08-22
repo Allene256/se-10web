@@ -26,7 +26,7 @@ export const OFFICERS = [
     lastName: "DELFINADO",
     quote: "Kanin is life, I don't like rice.",
     color: "#00F2FF",
-    photo: "Kobie.png",
+    photo: "/Kobie.png",
   },
   {
     id: 4,
@@ -62,7 +62,7 @@ export const OFFICERS = [
     lastName: "DALISAY",
     quote: "Where ever life plants you, bloom with grace.",
     color: "#00F2FF",
-    photo: "Josh.png",
+    photo: "/Josh.png",
   },
   {
     id: 8,
@@ -107,7 +107,7 @@ export const OFFICERS = [
     lastName: "PUEYO",
     quote: "123, kanya kanya na!.",
     color: "#00F2FF",
-    photo: "Daph.png",
+    photo: "/Daph.png",
   },
 ];
 
